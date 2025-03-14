@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisaan Connect - Empowering Farmers</title>
+  <style>
+
+
+     /* Tractor Marquee Styles */
+     .tractor-marquee {
+        position: absolute;
+        top: 10;
+        left: 0;
+        width: 100%;
+        background: transparent;
+        color: white;
+        padding: 10px 0;
+        overflow: hidden;
+        z-index: 1001;
+      }
+  
+      .marquee-content {
+        display: inline-block;
+        white-space: nowrap;
+        animation: tractorPull 20s linear infinite;
+      }
+  
+      .tractor-icon {
+        display: inline-block;
+        margin-right: 15px;
+        font-size: 30px;
+        vertical-align: middle;
+      }
+  
+      .marquee-text {
+        display: inline-block;
+        font-size: 20px;
+        vertical-align: middle;
+        color: purple;
+      }
+  
+      @keyframes tractorPull {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+      }
+  
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .marquee-text {
+          font-size: 14px;
+        }
+        .tractor-icon {
+          font-size: 20px;
+        }
+      }
+
+
+
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    /* Header Section */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 5%; /* Percentage padding for better responsiveness */
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%; /* Adjusted width with padding */
+        left: 50%;
+        transform: translateX(-50%); /* Center align header */
+        top: 0;
+        z-index: 1000;
+        box-sizing: border-box; /* Include padding in width calculation */
+      }
+      
+      header nav {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap; /* Allow items to wrap on small screens */
+      }
+      
+      header .auth-buttons {
+        display: flex;
+        gap: 10px;
+        margin-left: auto; /* Push auth buttons to right */
+      }
+      
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        header {
+          padding: 15px 5%;
+          width: 90%;
+        }
+        
+        header nav {
+          gap: 10px;
+          font-size: 14px;
+        }
+        
+        header .auth-buttons button {
+          padding: 8px 15px;
+          font-size: 14px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        header {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        
+        header .logo {
+          order: 1;
+          width: 100%;
+          justify-content: center;
+        }
+        
+        header nav {
+          order: 3;
+          width: 100%;
+          justify-content: center;
+        }
+        
+        header .auth-buttons {
+          order: 2;
+          width: 100%;
+          justify-content: center;
+          margin-left: 0;
+        }
+      }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      font-size: 27px;
+      font-weight: 700;
+      color: #28a745;
+    }
+
+    header .logo .icon {
+      margin-right: 15px;
+      font-size: 38px;
+      color: #007bff;
+    }
+
+    header .logo .connect {
+      color: #007bff;
+    }
+
+    header nav {
+      display: flex;
+      align-items: center;
+      gap: 20px; /* Add spacing between nav items */
+    }
+
+    header nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    header nav a:hover {
+      color: #28a745;
+    }
+
+    header .auth-buttons {
+      display: flex;
+      gap: 10px; /* Add spacing between buttons */
+    }
+
+    header .auth-buttons button {
+      padding: 10px 20px;
+      border:#e9e9e9;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position:relative;
+      overflow: hidden;
+    }
+
+    header .auth-buttons .register {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    header .auth-buttons .register:hover {
+      background-color: #218838;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    header .auth-buttons .login {
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header .auth-buttons .login:hover {
+      background-color: #e9e9e9;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Dynamic Hover Effects */
+    header .auth-buttons button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300%;
+      height: 300%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%) rotate(45deg);
+      transition: all 0.5s ease;
+      z-index: 0;
+    }
+
+    header .auth-buttons button:hover::before {
+      width: 0;
+      height: 0;
+    }
+
+    header .auth-buttons button span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+      text-align: center;
+      color: #fff;
+      padding: 0 20px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    .hero .cta-button {
+      padding: 15px 30px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .hero .cta-button:hover {
+      background-color: #218838;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 80px 20px;
+      background: #f9f9f9;
+      text-align: center;
+    }
+
+    .features h2 {
+      font-size: 36px;
+      margin-bottom: 40px;
+      color: #28a745;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .feature-card img {
+      width: 60px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .feature-card p {
+      font-size: 16px;
+      color: #666;
+    }
+
+    /* Footer Section */
+    footer {
+      padding: 20px;
+      background: #28a745;
+      color: #fff;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 20px;
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+      }
+
+      header nav {
+        order: 1; /* Move navigation below logo and auth buttons */
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      header .auth-buttons {
+        order: 0; /* Keep auth buttons above navigation */
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .features h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <span class="icon">🌾</span>
+      <span>Kisaan</span>
+      <span class="connect">Connect</span>
+    </div>
+    <nav>
+      <a href="HomePage_DetailsFilling.html">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <div class="auth-buttons">
+        <a href="registration.html"><button class="register"><span>Register</span></button></a>
+        <a href="Login.html"><button class="login"><span>Login</span></button></a>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Empowering Farmers, Connecting Communities</h1>
+      <p>"The farmer is the only man in our economy who buys everything at retail, sells everything at wholesale, and pays the freight both ways." - John F. Kennedy</p>
+      <a href="HomePage_DetailsFilling.html"><button class="cta-button">Get Started</button></a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+   
+  <section>
+    <div class="tractor-marquee">
+      <div class="marquee-content">
+        <span class="tractor-icon">🚜</span>
+        <span class="marquee-text">
+          🌱 Real-time crop prices updates • 🚜 Equipment rental special offers • 💬 Farmer community discussions live • 🌾 Seasonal farming tips • 📈 Market trend analysis
+        </span>
+      </div>
+    </div>
+    </section>
+
+  <section class="features">
+    <h2>Why Choose Kisaan Connect?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <img src="https://img.icons8.com/color/96/000000/tractor.png" alt="Tractor">
+        <h3>Equipment Rental</h3>
+        <p>Rent or buy farming equipment at affordable prices.</p>
+      </div>
+      <div class="feature-card">
+        <img src="https://img.icons8.com/color/96/000000/wheat.png" alt="Wheat">
+        <h3>Direct Marketplace</h3>
+        <p>Sell your produce directly to customers without middlemen.</p>
+      </div>
+      <div class="feature-card">
+        <img src="https://img.icons8.com/color/96/000000/chat.png" alt="Chat">
+        <h3>Connect & Collaborate</h3>
+        <p>Chat with other farmers, know the real cost of crops, and directly deal for farming-related work.</p>
+      </div>
+      <div class="feature-card">
+        <img src="https://img.icons8.com/color/96/000000/community.png" alt="Community">
+        <h3>Community Support</h3>
+        <p>Connect with other farmers and share knowledge.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2023 Kisaan Connect. All rights reserved.</p>
+  </footer>
+</body>
+</html>

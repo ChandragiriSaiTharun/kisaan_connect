@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Kisaan Connect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .grid-item {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style: none;
+        }
+        li {
+            padding: 8px 0;
+            font-size: 16px;
+            color: #555;
+        }
+        li::before {
+            content: "✔";
+            color: #27ae60;
+            font-weight: bold;
+            padding-right: 8px;
+        }
+        @media (min-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>About Kisaan Connect</h1>
+        <div class="grid-container">
+
+            <div class="grid-item">
+                <h2>Our Vision</h2>
+                <ul>
+                    <li>Empower farmers with direct market access.</li>
+                    <li>Eliminate middlemen to ensure fair pricing.</li>
+                    <li>Bridge the gap between farmers and consumers.</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h2>Features</h2>
+                <ul>
+                    <li>Real-time crop price updates.</li>
+                    <li>Seamless buying and selling of crops.</li>
+                    <li>User-friendly dashboard for farmers.</li>
+                    <li>Secure and fast transactions.</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h2>Benefits</h2>
+                <ul>
+                    <li>Increased profits for farmers.</li>
+                    <li>Lower prices for consumers.</li>
+                    <li>Fresh and organic produce availability.</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h2>How It Works?</h2>
+                <ul>
+                    <li>Farmers list their crops with pricing.</li>
+                    <li>Buyers place orders directly from farmers.</li>
+                    <li>Payment and logistics are handled securely.</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
