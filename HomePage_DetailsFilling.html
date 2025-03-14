@@ -6,15 +6,31 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Kisaan Connect - Marketplace</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 20px;
-            <!-- background: url("https://www.pixelstalk.net/wp-content/uploads/images6/Free-download-Aesthetic-Desktop-Image.jpg"); -->
-            width: auto;
-            background-repeat: no-repeat;
-            background:#90EE90;
-        }
+        /* Main body styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    position: relative;
+    width: auto;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+    url("https://images.pexels.com/photos/247597/pexels-photo-247597.jpeg?cs=srgb&dl=pexels-pixabay-247597.jpg&fm=jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Background Overlay */
+#backgroundOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Default opacity */
+    z-index: -1; /* Keep it behind content */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition */
+}
+
 
         /* Navbar */
 
@@ -240,13 +256,15 @@
 
         /* Crop Grid */
         .crop-grid {
+            
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Increased min width */
+            gap: 25px; /* Increased gap for better spacing */
+            max-width: 1600px; /* Increased max-width */
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
         }
+        
 
         .crop-card {
             background: white;
@@ -351,19 +369,25 @@
         }
 
         .crop-form {
-            background: white;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+            url('https://images.squarespace-cdn.com/content/v1/62e7a92f066fa3730dcd4604/33539c45-b4ba-42fb-aa75-4002b5d08b46/Texas+Cash+Crops.jpg')  no-repeat center center/cover;
             padding: 20px;
             max-width: 500px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-
-        .crop-form input {
-            width: 100%;
+        .form-group {
+             margin: 5px;
+        }
+        .form-group label{
+            text-align: left;
+        }
+        .crop-form input, select {
+            width: 60%;
             padding: 8px;
             margin: 5px 0;
-            border: 1px solid #ccc;
+            border: 1px solid #25c717;
             border-radius: 5px;
         }
 
@@ -467,88 +491,114 @@
     <!-- Crop Submission Form (Hidden Initially) -->
     <div class="crop-form-container" id="cropFormContainer" onclick="closeForm(event)">
         <div class="crop-form" onclick="event.stopPropagation()">
-            <h3>Sell Your Crop</h3>
-            <input type="text" id="cropName" placeholder="Crop Name" required>
-            <input type="file" id="cropImage"  accept="image/*" required>
-            <input type="number" id="cropPrice" placeholder="Price per kg (₹)" required>
-            <input type="number" id="cropQuantity" placeholder="Quantity (kg)" required>
-            <input type="text" id="sellerName" placeholder="Seller Name" required>
-            <input type="text" id="sellerLocation" placeholder="Location" required>
+            <h2>Sell Your Crop<span class="icon">🌾</span></h2>
+            <div class="form-group">
+                <label for="cropName"><b>Crop Name:</b></label>
+                <input type="text" id="cropName" placeholder="Enter Crop Name" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="cropImage"><b>Crop Image:</b></label>
+                <input type="file" id="cropImage" accept="image/*" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="cropUnit"><b>Select Unit:</b></label>
+                <select id="cropUnit" required>
+                    <option value="unit" selected>--Select Unit--</option>
+                    <option value="kg">Kilogram (kg)</option>
+                    <option value="quintal">Quintal (100 kg)</option>
+                    <option value="ton">Ton (1000 kg)</option>
+                    <option value="pound">Pounds (lb)</option>
+                </select>
+            </div>
+        
+            <div class="form-group">
+                <label for="cropQuantity"><b>Quantity:</b></label>
+                <input type="number" id="cropQuantity" placeholder="Enter Quantity(in numbers)" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="cropPrice"><b>Price per Unit:</b></label>
+                <input type="number" id="cropPrice" placeholder="Enter Price per Unit" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="sellerName"><b>Seller Name:</b></label>
+                <input type="text" id="sellerName" placeholder="Enter Seller Name" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="sellerLocation"><b>Location:</b></label>
+                <input type="text" id="sellerLocation" placeholder="Enter Location" required>
+            </div>
             <button onclick="addCrop()">Add Crop</button>
         </div>
     </div>
 
     <!-- Add Crop Button -->
     <button id="addCropButton" onclick="openCropForm()">+ Add Crop</button>
-
-    <script>
-        function openCropForm() {
-            document.getElementById('cropFormContainer').style.display = 'flex';
+<script>
+    function openCropForm() {
+        let formContainer = document.getElementById('cropFormContainer');
+        let addButton = document.getElementById('addCropButton');
+    
+        formContainer.style.display = 'flex';  // Show the form
+        addButton.style.visibility = 'hidden';  // Hide the button (but keep its space)
+    }
+    
+    function closeForm(event) {
+        let formContainer = document.getElementById('cropFormContainer');
+        let addButton = document.getElementById('addCropButton');
+    
+        // Only close the form if clicking outside the form itself
+        if (event.target.id === "cropFormContainer") {
+            formContainer.style.display = 'none';  
+            addButton.style.visibility = 'visible';  // Show the button again
         }
-
-        function closeForm(event) {
-            if (event.target.id === "cropFormContainer") {
-                document.getElementById('cropFormContainer').style.display = 'none';
-            }
+    }
+    
+    function addCrop() {
+        const name = document.getElementById('cropName').value;
+        const imageInput = document.getElementById('cropImage');
+        const price = document.getElementById('cropPrice').value;
+        const quantity = document.getElementById('cropQuantity').value;
+        const seller = document.getElementById('sellerName').value;
+        const location = document.getElementById('sellerLocation').value;
+        const unit = document.getElementById('cropUnit').value; 
+    
+        if (!name || !imageInput.files.length || !price || !quantity || !seller || !location || !unit) {
+            alert("Please fill all fields!");
+            return;
         }
-
-        function addCrop() {
-            const name = document.getElementById('cropName').value;
-            const imageInput = document.getElementById('cropImage');
-            const price = document.getElementById('cropPrice').value;
-            const quantity = document.getElementById('cropQuantity').value;
-            const seller = document.getElementById('sellerName').value;
-            const location = document.getElementById('sellerLocation').value;
-
-            if (!name || !imageInput.files.length || !price || !quantity || !seller || !location) {
-                alert("Please fill all fields!");
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                const cropGrid = document.querySelector('.crop-grid');
-
-                const card = document.createElement('div');
-                card.className = 'crop-card';
-                card.innerHTML = `
+    
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const cropGrid = document.querySelector('.crop-grid');
+    
+            const card = document.createElement('div');
+            card.className = 'crop-card';
+            card.innerHTML = `
                 <img src="${event.target.result}" class="crop-image" alt="${name}">
                 <div class="crop-details">
                     <h3>${name}</h3>
-                    <div class="price-tag">₹${price}/kg</div>
-                    <div class="quantity-available">Available: ${quantity} kg</div>
+                    <div class="price-tag">₹${price}/${unit}</div>
+                    <div class="quantity-available">Available: ${quantity} ${unit}</div>
                     <div class="seller-info">
-                        <img src="https://randomuser.me/api/portraits/men/${Math.floor(Math.random()*100)}.jpg" class="seller-avatar" alt= <img src="/home/thanush/Kisaan Connect/KisaanPic.jpg"> 
-                        <div>
-                            <b><div>${seller}</div></b>
-                            <div>${location}</div>
-                            <br>
-                        </div>
-                        <div class="button-group">
-                            <button class="buy-button" onclick="scrollToBuy()">Buy</button>
-                            <button class="chat-button">Chat with Seller</button>
-                        </div>
-                `;
-
-                cropGrid.appendChild(card);
-                document.getElementById('cropFormContainer').style.display = 'none';
-            };
-
-            reader.readAsDataURL(imageInput.files[0]);
-        }
-
-
-        function applyFilter() {
-        let category = document.getElementById("filterCategory").value;
-        let value = document.getElementById("filterInput").value;
-        
-        if (category && value) {
-            alert(`Filtering by ${category}: ${value}`); 
-            // Replace with actual filtering logic
-        } else {
-            alert("Please select a filter category and enter a value.");
-        }
+                        <b>${seller}</b> - ${location}
+                    </div>
+                </div>
+            `;
+    
+            cropGrid.appendChild(card);
+    
+            // Hide the form and show the "+ Add Crop" button after adding
+            document.getElementById('cropFormContainer').style.display = 'none';
+            document.getElementById('addCropButton').style.visibility = 'visible';
+        };
+    
+        reader.readAsDataURL(imageInput.files[0]);
     }
-    </script>
+</script>
 </body>
 </html>
