@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.2",
+    "mysql2": "^3.14.0"
+  },
+  "name": "kisaan_connect",
+  "version": "1.0.0",
+  "description": "<strong>Team Kisaan</strong> : <br> 1) Thanush 2) Sai Tharun (lead) 3) Shanmukh Tharun 4) Jeevan 5) Arif 6) Zahoor",
+  "main": "db.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
